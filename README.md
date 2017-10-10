@@ -1,7 +1,9 @@
 # Meteor Up
 
-> This is a Meteor 1.4-ready fork of initial meteor-up project.<br/>
-> It uses Node 4.4.7 and MongoDB 3.2 by default.
+> This is a Meteor 1.6-ready fork of initial meteor-up project.<br/>
+> It uses Node 8.6.0 and MongoDB 3.2 by default.
+> Forked from m4v3r/meteor-up to include 1.6 changes (namely supporting newer version of wait-for-mongo).
+> Also includes specific fix for a bad package that meteor fails to build, sharp - https://github.com/lovell/sharp/issues/637
 > Docker-enabled version is developed by KadiraHQ here: https://github.com/kadirahq/meteor-up.
 
 #### Production Quality Meteor Deployments
