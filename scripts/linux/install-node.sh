@@ -14,7 +14,7 @@ sudo apt-get update
 <% if (nodeVersion) { %>
   NODE_VERSION=<%= nodeVersion %>
 <% } else {%>
-  NODE_VERSION=0.10.43
+  NODE_VERSION=8.6.0
 <% } %>
 
 ARCH=$(python -c 'import platform; print platform.architecture()[0]')
@@ -36,6 +36,13 @@ sudo mv ${NODE_DIST} /opt/nodejs
 
 sudo ln -sf /opt/nodejs/bin/node /usr/bin/node
 sudo ln -sf /opt/nodejs/bin/npm /usr/bin/npm
+
+sudo rm -rf /usr/local/bin/wait-for-mongo
+sudo ln -s /opt/nodejs/bin/wait-for-mongo /usr/local/bin/wait-for-mongo
+sudo rm -rf /usr/local/bin/forever
+sudo ln -s /opt/nodejs/bin/forever /usr/local/bin/forever
+sudo rm -rf /usr/local/bin/userdown
+sudo ln -s /opt/nodejs/bin/userdown /usr/local/bin/userdown
 
 # Install node-gyp and remove old files if necessary
 sudo npm install -g node-gyp

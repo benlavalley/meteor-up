@@ -1,10 +1,23 @@
 # Meteor Up
-
-> This is a systemD ready version of the M4v3R/meteor-up fork for Ubuntu 16.04 which lacks upstart. <br/>
-> This is a Meteor 1.4-ready fork of initial meteor-up project.<br/>
-> It uses Node 4.4.7 and MongoDB 3.2 by default.
+> Supports Meteor 1.6 / Node V8, does *NOT* require Docker, and supports systemd service (Ubuntu 16 LTS) <br/>
+> <br/>
+> This is a fork of https://github.com/sean-stanley/meteor-up <br/>
+> That project is itself a fork M4v3R/meteor-up, which is forked from the original meteor 'mup' project which was abandoned by it's author.<br/>
+> M4v3R/meteor-up only supports the upstart service system, which means it can only be used on Ubuntu 14.<br/>
+> sean-stanley/meteor-up supports the systemd service system, which means it can be used on Ubuntu 16/17+<br/>
+> <br/>
+> To use this with Meteor 1.6, I had to make changes to support a custom version of wait-for-mongo, which was also originally abandoned by it's author.<br/>
+> The custom fork of wait-for-mongo is here - https://github.com/mkg20001/wait-for-mongo <br/>
+> It is installed with "npm install https://github.com/mkg20001/wait-for-mongo"
+> This version of mup deploys node v8.6 and MongoDB 3.2 by default.
+> I also updated the mup config files to support fixing a bug with a package - https://github.com/lovell/sharp/issues/637
+> I hate to have to make such a specific fix. If I had more time I would update mup.json to support 'custom' shell commands.
+>
 > Docker-enabled version is developed by KadiraHQ here: https://github.com/kadirahq/meteor-up.
-
+>
+> Thank you Arunoda (original MUP author), Sean Stanley and M4v3R for your efforts!
+>
+>
 #### Production Quality Meteor Deployments
 
 Meteor Up (mup for short) is a command line tool that allows you to deploy any [Meteor](http://meteor.com) app to your own server. It supports only Debian/Ubuntu flavours and Open Solaris at the moments. (PRs are welcome)

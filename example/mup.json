@@ -17,7 +17,7 @@
   "setupNode": true,
 
   // WARNING: If nodeVersion omitted will setup 0.10.43 by default. Do not use v, only version number.
-  "nodeVersion": "4.4.7",
+  "nodeVersion": "8.6.0",
 
   // Install PhantomJS in the server
   "setupPhantom": true,
@@ -28,6 +28,9 @@
 
   // Application name (No spaces)
   "appName": "meteor",
+
+  // enable fix for https://github.com/lovell/sharp/issues/637 -- clears sharp/vendors folder so sharp can be properly built by meteor build process.
+  "enableSharpBinaryFix": "no",
 
   // Location of app (local directory)
   "app": "/path/to/the/app",

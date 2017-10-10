@@ -10,8 +10,8 @@ sudo chown ${USER} /opt/<%= appName %> -R
 sudo chown ${USER} /etc/systemd/system/
 sudo chown ${USER} /lib/systemd/system/
 
-
-sudo npm install -g forever userdown wait-for-mongo node-gyp
+# need new version of wait-for-mongo which uses mongodb node driver 2.2.x, otherwise it breaks.
+sudo npm install -g forever userdown https://github.com/mkg20001/wait-for-mongo.git node-gyp
 
 # Creating a non-privileged user
 sudo useradd meteoruser || :

@@ -11,7 +11,8 @@ sudo chown ${USER} /opt/<%= appName %> -R
 sudo chown ${USER} /etc/init
 sudo chown ${USER} /etc/
 
-sudo npm install -g userdown wait-for-mongo node-gyp
+#new fork of wait-for-mongo with update to support mongo nodedb driver 2.2 - needed for new versions of mongo
+sudo npm install -g userdown https://github.com/mkg20001/wait-for-mongo.git node-gyp
 
 # Creating a non-privileged user
 sudo useradd mtuser || :
