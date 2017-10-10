@@ -14,7 +14,7 @@ sudo apt-get update
 <% if (nodeVersion) { %>
   NODE_VERSION=<%= nodeVersion %>
 <% } else {%>
-  NODE_VERSION=0.10.43
+  NODE_VERSION=8.6.0
 <% } %>
 
 ARCH=$(python -c 'import platform; print platform.architecture()[0]')

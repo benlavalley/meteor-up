@@ -57,6 +57,13 @@ sudo tar xvzf bundle.tar.gz > /dev/null
 # rebuilding fibers
 cd ${BUNDLE_DIR}/programs/server
 
+#https://github.com/lovell/sharp/issues/637
+#fix for sharp package that blows up rebuilding....need to remove it's "vendors" subfolder, regardless of whatever NPM package needs it (in my case, dhash).
+if [ $enableSharpBinaryFix = "yes" ]; then
+    echo "Executing fix for clearing npm package sharp's sharp/vendor folder - enableSharpBinaryFix is set to <%= enableSharpBinaryFix %>"
+    sudo find . -type d -regex ".*sharp*" -exec rm -rf {}/vendor \;
+fi
+
 if [ -f package.json ]; then
   # support for 0.9
   sudo npm install
@@ -84,9 +91,9 @@ fi
 sudo mv tmp/bundle app
 
 #wait and check
-echo "Waiting for MongoDB to initialize. (5 minutes)"
+echo "Waiting for MongoDB to initialize. (30 seconds)"
 . /opt/<%= appName %>/config/env.sh
-wait-for-mongo ${MONGO_URL} 300000
+wait-for-mongo ${MONGO_URL} 30000
 
 # restart app
 sudo svcadm disable <%= appName %> || :
