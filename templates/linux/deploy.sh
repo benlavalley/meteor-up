@@ -1,6 +1,7 @@
 #!/bin/bash
 APP_NAME="<%= appName %>"
 enableSharpBinaryFix="<%= enableSharpBinaryFix %>"
+noBundleDelete="<%= noBundleDelete %>"
 
 # utilities
 gyp_rebuild_inside_node_modules () {
@@ -101,6 +102,10 @@ if [ $enableSharpBinaryFix = "yes" ]; then
     sudo find . -type d -regex ".*sharp*" -exec rm -rf {}/vendor \;
 fi
 
+# Added feature to support avoiding removing bundle. Useful for deploying numerous app instances with only a single build.
+if [ $noBundleDelete = "yes" ]; then
+    echo "Not removing bundle after deploy - noBundleDelete is set to <%= noBundleDelete %>"
+fi
 
 if [ -d ./npm ]; then
   cd npm

@@ -32,6 +32,9 @@
   // enable fix for https://github.com/lovell/sharp/issues/637 -- clears sharp/vendors folder so sharp can be properly built by meteor build process.
   "enableSharpBinaryFix": "no",
 
+  // if enabled, do not remove bundle after deploy.
+  "noBundleDelete": "no",
+
   // Location of app (local directory)
   "app": "/path/to/the/app",
 
