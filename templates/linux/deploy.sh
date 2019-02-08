@@ -5,7 +5,9 @@ noBundleDelete="<%= noBundleDelete %>"
 
 # utilities
 gyp_rebuild_inside_node_modules () {
+  echo "> gyp_rebuild_inside_node_modules called..."
   for npmModule in ./*; do
+    echo " > changing to: $npmModule"
     cd $npmModule
 
     isBinaryModule="no"
@@ -20,6 +22,7 @@ gyp_rebuild_inside_node_modules () {
           cd ./node_modules
           if [ "$(ls ./ )" ]; then
             for module in ./*; do
+              echo " > changing to: $module"
               cd $module
               check_for_binary_modules
               cd ..
@@ -48,6 +51,7 @@ gyp_rebuild_inside_node_modules () {
 }
 
 rebuild_binary_npm_modules () {
+  echo "> Rebuilding binary NPM modules..."
   for package in ./*; do
     if [ -d $package/node_modules ]; then
       cd $package/node_modules
