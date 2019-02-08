@@ -57,7 +57,7 @@ gyp_rebuild_inside_node_modules () {
 
 rebuild_binary_npm_modules () {
   current_dir=$(pwd)
-  echo "> Rebuilding binary NPM modules... 1>&2
+  echo "> Rebuilding binary NPM modules..." 1>&2
   echo "> Rebuilding binary NPM modules... current dir: $current_dir" 1>&2
   for package in ./*; do
     if [ -d $package/node_modules ]; then
