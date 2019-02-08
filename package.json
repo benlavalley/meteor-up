@@ -1,6 +1,6 @@
 {
   "name": "mup",
-  "version": "0.12.93",
+  "version": "0.12.94",
   "description": "Production Quality Meteor Deployments",
   "dependencies": {
     "async": "^0.9.0",
@@ -18,7 +18,7 @@
   "author": "Arunoda Susiripala <arunoda.susiripala@gmail.com>",
   "repository": {
     "type": "git",
-    "url": "git://github.com/arunoda/meteor-up.git"
+    "url": "git://github.com/ben.lavalley/meteor-up.git"
   },
   "license": "MIT"
 }
