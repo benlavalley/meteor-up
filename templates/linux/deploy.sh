@@ -5,11 +5,12 @@ noBundleDelete="<%= noBundleDelete %>"
 
 # utilities
 gyp_rebuild_inside_node_modules () {
-  echo "> > gyp_rebuild_inside_node_modules called..."
-  echo "> > gyp_rebuild_inside_node_modules - current dir: $PWD"
+  current_dir=$(pwd)
+  echo "> gyp_rebuild_inside_node_modules called..." 1>&2
+  echo "> gyp_rebuild_inside_node_modules - current dir: $current_dir" 1>&2
   for npmModule in ./*; do
-    echo " > > > changing to: $npmModule"
-    echo "> > changing to: $npmModule - current dir: $PWD"
+    echo " > > changing to: $npmModule"
+    echo "> changing to: $npmModule - current dir: $current_dir" 1>&2
     cd $npmModule
 
     isBinaryModule="no"
@@ -24,8 +25,8 @@ gyp_rebuild_inside_node_modules () {
           cd ./node_modules
           if [ "$(ls ./ )" ]; then
             for module in ./*; do
-              echo "> > changing to: $module"
-              echo "> > changing to: $module - current dir: $PWD"
+              echo "> changing to: $module" 1>&2
+              echo "> changing to: $module - current dir: $current_dir" 1>&2
               cd $module
               check_for_binary_modules
               cd ..
@@ -39,8 +40,8 @@ gyp_rebuild_inside_node_modules () {
     check_for_binary_modules
 
     if [ $isBinaryModule = "yes" ]; then
-      echo " > > > > $npmModule: npm install due to binary npm modules"
-      echo " > > > > $npmModule: npm install due to binary npm modules - current dir: $PWD"
+      echo " > $npmModule: npm install due to binary npm modules" 1>&2
+      echo " > $npmModule: npm install due to binary npm modules - current dir: $current_dir" 1>&2
       rm -rf node_modules
       if [ -f binding.gyp ]; then
         sudo npm install
@@ -55,24 +56,25 @@ gyp_rebuild_inside_node_modules () {
 }
 
 rebuild_binary_npm_modules () {
-  echo "> > > > Rebuilding binary NPM modules...
-  echo "> > > > Rebuilding binary NPM modules... current dir: $PWD"
+  current_dir=$(pwd)
+  echo "> Rebuilding binary NPM modules... 1>&2
+  echo "> Rebuilding binary NPM modules... current dir: $current_dir" 1>&2
   for package in ./*; do
     if [ -d $package/node_modules ]; then
-      echo "> > > > Processing Package Part 1: $package"
-      echo "> > > > Processing Package Part 1: $package - curent dir: $PWD"
+      echo "> Processing Package Part 1: $package" 1>&2
+      echo "> Processing Package Part 1: $package - current dir: $current_dir" 1>&2
       cd $package/node_modules
         gyp_rebuild_inside_node_modules
       cd ../../
     elif [ -d $package/main/node_module ]; then
-      echo "> > > > Processing Package Part 2: $package"
-      echo "> > > > Processing Package Part 2: $package - curent dir: $PWD"
+      echo "> Processing Package Part 2: $package" 1>&2
+      echo "> Processing Package Part 2: $package - current dir: $current_dir" 1>&2
       cd $package/node_modules
         gyp_rebuild_inside_node_modules
       cd ../../../
     elif [ -d $package ]; then # Meteor 1.3
-      echo "> > > > Processing Package Part 3: $package"
-      echo "> > > > Processing Package Part 3: $package - curent dir: $PWD"
+      echo "> Processing Package Part 3: $package" 1>&2
+      echo "> Processing Package Part 3: $package - current dir: $current_dir" 1>&2
       cd $package
         rebuild_binary_npm_modules
       cd ..
