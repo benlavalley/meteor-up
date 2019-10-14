@@ -78,15 +78,19 @@ rebuild_binary_npm_modules () {
 }
 
 revert_app () {
-  if [[ -d old_app ]]; then
-    sudo rm -rf app
-    sudo mv old_app app
-    sudo systemctl restart <%= appName %>.service || :
-    echo "Latest deployment failed! Reverted back to the previous version." 1>&2
-    exit 1
+  if [ $noBackupCurrentApp = "yes" ]; then
+      echo "Latest deployment failed! noBackupCurrentApp set to yes - not reverting to old app." 1>&2
   else
-    echo "App did not pick up! Please check app logs." 1>&2
-    exit 1
+    if [[ -d old_app ]]; then
+      sudo rm -rf app
+      sudo mv old_app app
+      sudo systemctl restart <%= appName %>.service || :
+      echo "Latest deployment failed! Reverted back to the previous version." 1>&2
+      exit 1
+    else
+      echo "App did not pick up! Please check app logs." 1>&2
+      exit 1
+    fi
   fi
 }
 
@@ -163,6 +167,7 @@ fi
 if [[ -d app ]]; then
   if [ $noBackupCurrentApp = "yes" ]; then
     echo "Not backing up current app - noBackupCurrentApp is set to <%= noBackupCurrentApp %>"
+    rm -rf app
   else
     sudo mv app old_app
   fi
