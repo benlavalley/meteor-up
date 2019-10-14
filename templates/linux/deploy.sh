@@ -2,6 +2,7 @@
 APP_NAME="<%= appName %>"
 enableSharpBinaryFix="<%= enableSharpBinaryFix %>"
 noBundleDelete="<%= noBundleDelete %>"
+noBackupCurrentApp="<%= noBackupCurrentApp %>"
 
 # utilities
 gyp_rebuild_inside_node_modules () {
@@ -118,6 +119,11 @@ if [ $noBundleDelete = "yes" ]; then
     echo "Not removing bundle after deploy - noBundleDelete is set to <%= noBundleDelete %>"
 fi
 
+# Added feature to support avoiding restarting after a deploy failure. We dont want to start the app in a "dirty"/inconsistent state.
+if [ $noBackupCurrentApp = "yes" ]; then
+    echo "Not restarting app if deploy fails - noBackupCurrentApp is set to <%= noBackupCurrentApp %>"
+fi
+
 if [ -d ./npm ]; then
   cd npm
   if [ -d ./node_modules ]; then # Meteor 1.3
@@ -155,7 +161,11 @@ fi
 
 ## backup current version
 if [[ -d app ]]; then
-  sudo mv app old_app
+  if [ $noBackupCurrentApp = "yes" ]; then
+    echo "Not backing up current app - noBackupCurrentApp is set to <%= noBackupCurrentApp %>"
+  else
+    sudo mv app old_app
+  fi
 fi
 
 sudo mv tmp/bundle app

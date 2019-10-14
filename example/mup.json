@@ -35,6 +35,9 @@
   // if enabled, do not remove bundle after deploy.
   "noBundleDelete": "no",
 
+  // if enabled, do not backup current app - ensures we dont revert to old / bad app in dirty state.
+  "noBackupCurrentApp": "yes",
+
   // Location of app (local directory)
   "app": "/path/to/the/app",
 

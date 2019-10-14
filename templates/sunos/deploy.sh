@@ -69,6 +69,11 @@ if [ $noBundleDelete = "yes" ]; then
     echo "Not removing bundle after deploy - noBundleDelete is set to <%= noBundleDelete %>"
 fi
 
+# Added feature to support avoiding restarting after a deploy failure. We dont want to start the app in a "dirty"/inconsistent state.
+if [ $noBackupCurrentApp = "yes" ]; then
+    echo "Not backing up app to prevent restart in bad state - noBackupCurrentApp is set to <%= noBackupCurrentApp %>"
+fi
+
 if [ -f package.json ]; then
   # support for 0.9
   sudo npm install
