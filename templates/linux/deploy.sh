@@ -167,7 +167,7 @@ fi
 if [[ -d app ]]; then
   if [ $noBackupCurrentApp = "yes" ]; then
     echo "Not backing up current app - noBackupCurrentApp is set to <%= noBackupCurrentApp %>"
-    rm -rf app
+    sudo rm -rf app
   else
     sudo mv app old_app
   fi
