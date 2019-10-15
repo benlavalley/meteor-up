@@ -1,6 +1,6 @@
 {
   "name": "mup",
-  "version": "0.13.0",
+  "version": "0.13.1",
   "description": "Production Quality Meteor Deployments",
   "dependencies": {
     "async": "^3.1.0",
