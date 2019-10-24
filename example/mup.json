@@ -38,6 +38,9 @@
   // if enabled, do not backup current app - ensures we dont revert to old / bad app in dirty state.
   "noBackupCurrentApp": "yes",
 
+  // systemd restart options. Sometimes we may not want to restart an app. Set to "no" for no restart.
+  "restartOptions": "always",
+
   // Location of app (local directory)
   "app": "/path/to/the/app",
 
